@@ -13,6 +13,14 @@ body {
     align-items: center;
 }
 
+.header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    padding: 24px;
+    color: black;
+}
+
 .board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
