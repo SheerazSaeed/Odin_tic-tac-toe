@@ -1,3 +1,22 @@
+function showModal(message) {
+    const modal = document.getElementById('gameModal');
+    const span = document.getElementsByClassName("close")[0];
+    document.getElementById('modalText').textContent = message;
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Also close if anywhere outside of the modal is clicked
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 const board = ['', '', '', '', '', '', '', '', ''];
 const computerSymbol = 'O';
 
@@ -68,27 +87,27 @@ function checkGameOver() {
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
         [0, 4, 8], [2, 4, 6]
     ];
-
     let gameWon = false;
     winningCombinations.forEach((combo) => {
         if (board[combo[0]] && board[combo[0]] === board[combo[1]] && board[combo[1]] === board[combo[2]]) {
             gameWon = true;
             const winner = board[combo[0]] === 'X' ? playerName : "Computer";
             setTimeout(() => {
-                alert(`${winner} wins!`);
+                showModal(`${winner} wins!`);
                 board.fill('');
                 renderBoard();
-            }, 10);  // Short delay before showing the alert to ensure the board is updated
+            }, 10);
         }
     });
 
     if (!gameWon && board.every(cell => cell !== '')) {
         setTimeout(() => {
-            alert("It's a tie!");
+            showModal("It's a tie!");
             board.fill('');
             renderBoard();
         }, 10);
     }
+
     return gameWon;
 }
 
